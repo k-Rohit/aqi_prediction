@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - master  # Change to your branch name if different
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - checkout: self
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.10.14'  # Specify your Python version
+      addToPath: true
+
+  - script: |
+      echo "Installing dependencies..."
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+
+  - script: |
+      echo "Running tests..."
+      # Run your tests here if any (optional)
+    displayName: 'Run Tests'
+
+  - task: AzureWebApp@1
+    inputs:
+      appType : 'webApp'
+      azureSubscription: 'Azure for Students'  # Replace with your Azure subscription name
+      appName: 'aqi-pred'  # Replace with your Azure App Service name
+      package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+      deploymentMethod: 'auto'
