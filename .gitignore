@@ -1,0 +1,7 @@
+# Git ignore file
+
+__pycache__/
+data/
+models/
+.dvc/
+mlruns/

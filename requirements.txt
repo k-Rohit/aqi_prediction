@@ -1,0 +1,10 @@
+# Python dependencies
+
+scikit-learn
+pandas
+requests
+streamlit
+joblib
+mlflow
+azureml-sdk
+dvc
